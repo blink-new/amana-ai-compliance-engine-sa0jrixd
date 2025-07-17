@@ -30,21 +30,24 @@ const LandingPage = () => {
   const features = [
     {
       icon: Shield,
-      title: "Deep Shariah Stock Screening",
-      description: "AI agents analyze complex financial structures, segment-level data, and footnote disclosures that traditional rule-based systems miss",
-      details: "Go beyond surface-level ratios. Our AI parses complex financial statements, identifies hidden revenue streams, analyzes business model changes, and tracks compliance across subsidiaries. We provide dynamic, context-aware screening that adapts to evolving business structures."
+      title: "Deep Shariah Stock & ETF Screener",
+      description: "AI-powered analysis of financial reports with AAOIFI-compliant screening standards",
+      details: "Upload financial reports (PDF, XLSX) or connect API feeds. Our AI parses footnotes, segment-level financials, and disclosures to provide comprehensive Shariah compliance screening with full audit trails and multi-jurisdictional overlay support.",
+      keyBenefits: ["AAOIFI-compliant by default", "Multi-jurisdictional overlays", "Full audit trails", "API integration ready"]
     },
     {
       icon: FileText,
-      title: "Marketing Material Review",
-      description: "NLP-powered compliance review of marketing materials with suggested corrections",
-      details: "Upload PDFs, PPTs, and DOCs for automated scanning. Our NLP engine flags non-compliant phrases, suggests compliant language, and provides side-by-side editing with version control."
+      title: "Marketing Material Compliance Review",
+      description: "NLP-powered scanning and review of marketing materials for Shariah compliance",
+      details: "Upload and scan PDFs, PPTs, DOCs with our advanced NLP engine. Automatically flag non-compliant phrases, misleading claims, and suggest compliant language alternatives. Features side-by-side editor with version control for compliance teams to streamline review workflows.",
+      keyBenefits: ["Automated compliance flagging", "Compliant language suggestions", "Version control system", "Side-by-side editing"]
     },
     {
       icon: Calculator,
       title: "Purification Calculations",
       description: "Precise purification and zakat calculations with multiple methodologies",
-      details: "Identify and quantify non-compliant income within portfolios. Calculate zakat and purification amounts using AAOIFI, madhhab-based, or custom methodologies with detailed reporting."
+      details: "Identify and quantify non-compliant income within portfolios. Calculate zakat and purification amounts using AAOIFI, madhhab-based, or custom methodologies with detailed reporting for investor disclosure and internal audit.",
+      keyBenefits: ["Multiple calculation methods", "Automated income identification", "Investor-ready reports", "Internal audit support"]
     }
   ]
 
@@ -183,28 +186,56 @@ const LandingPage = () => {
               Three AI-powered modules that transform how Islamic financial institutions 
               manage compliance, risk, and regulatory requirements.
             </p>
+            <p className="text-sm text-gray-500 mt-4 font-medium">
+              👈 Click any feature to explore details
+            </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left Side - Feature Selection */}
+            <div className="space-y-4">
+              <div className="text-sm font-medium text-gray-700 mb-4 flex items-center">
+                <Target className="w-4 h-4 mr-2 text-primary" />
+                Select a feature to explore:
+              </div>
               {features.map((feature, index) => (
                 <Card 
                   key={index}
-                  className={`cursor-pointer transition-all duration-300 ${
+                  className={`cursor-pointer transition-all duration-300 relative ${
                     activeFeature === index 
-                      ? 'border-primary shadow-lg bg-primary/5' 
-                      : 'hover:border-gray-300'
+                      ? 'border-primary shadow-lg bg-primary/5 ring-2 ring-primary/20' 
+                      : 'hover:border-gray-300 hover:shadow-md'
                   }`}
                   onClick={() => setActiveFeature(index)}
                 >
+                  {/* Selection Indicator */}
+                  {activeFeature === index && (
+                    <div className="absolute -right-2 top-1/2 transform -translate-y-1/2">
+                      <div className="w-4 h-4 bg-primary rounded-full flex items-center justify-center">
+                        <ArrowRight className="w-2.5 h-2.5 text-white" />
+                      </div>
+                    </div>
+                  )}
+                  
                   <CardHeader className="pb-3">
                     <div className="flex items-center space-x-3">
-                      <div className={`p-2 rounded-lg ${
+                      <div className={`p-2 rounded-lg transition-colors ${
                         activeFeature === index ? 'bg-primary text-white' : 'bg-gray-100'
                       }`}>
                         <feature.icon className="w-5 h-5" />
                       </div>
-                      <CardTitle className="text-lg">{feature.title}</CardTitle>
+                      <div className="flex-1">
+                        <CardTitle className={`text-lg transition-colors ${
+                          activeFeature === index ? 'text-primary' : ''
+                        }`}>
+                          {feature.title}
+                        </CardTitle>
+                        {activeFeature === index && (
+                          <div className="text-xs text-primary font-medium mt-1">
+                            ✓ Selected - View details →
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </CardHeader>
                   <CardContent>
@@ -216,25 +247,80 @@ const LandingPage = () => {
               ))}
             </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="p-3 bg-primary rounded-lg">
-                  {React.createElement(features[activeFeature].icon, { 
-                    className: "w-6 h-6 text-white" 
-                  })}
+            {/* Right Side - Feature Details */}
+            <div className="lg:sticky lg:top-8">
+              <div className="bg-white rounded-2xl p-8 shadow-xl border-2 border-primary/10">
+                {/* Header with clear indication this is expanded view */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center space-x-3">
+                    <div className="p-3 bg-primary rounded-lg">
+                      {React.createElement(features[activeFeature].icon, { 
+                        className: "w-6 h-6 text-white" 
+                      })}
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-semibold text-gray-900">
+                        {features[activeFeature].title}
+                      </h3>
+                      <div className="text-sm text-primary font-medium">
+                        Feature Details
+                      </div>
+                    </div>
+                  </div>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary">
+                    {activeFeature + 1} of {features.length}
+                  </Badge>
                 </div>
-                <h3 className="text-2xl font-semibold">{features[activeFeature].title}</h3>
-              </div>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                {features[activeFeature].details}
-              </p>
-              <div className="flex items-center space-x-4">
-                <Button className="bg-primary hover:bg-primary/90">
-                  Try This Feature
-                </Button>
-                <Button variant="outline">
-                  Learn More
-                </Button>
+
+                {/* Detailed Description */}
+                <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                  {features[activeFeature].details}
+                </p>
+
+                {/* Key Benefits */}
+                <div className="mb-6">
+                  <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                    <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
+                    Key Benefits:
+                  </h4>
+                  <div className="grid grid-cols-1 gap-2">
+                    {features[activeFeature].keyBenefits.map((benefit, index) => (
+                      <div key={index} className="flex items-center text-gray-600">
+                        <div className="w-1.5 h-1.5 bg-accent rounded-full mr-3"></div>
+                        {benefit}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex items-center space-x-4">
+                  <Button className="bg-primary hover:bg-primary/90">
+                    Try This Feature
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                  <Button variant="outline">
+                    Learn More
+                  </Button>
+                </div>
+
+                {/* Navigation Hint */}
+                <div className="mt-6 pt-4 border-t border-gray-100">
+                  <div className="flex items-center justify-between text-sm text-gray-500">
+                    <span>Explore other features:</span>
+                    <div className="flex space-x-2">
+                      {features.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setActiveFeature(index)}
+                          className={`w-2 h-2 rounded-full transition-colors ${
+                            activeFeature === index ? 'bg-primary' : 'bg-gray-300'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
