@@ -18,7 +18,10 @@ import {
   Zap,
   Eye,
   BookOpen,
-  Award
+  Award,
+  Database,
+  Brain,
+  Target
 } from 'lucide-react'
 
 const LandingPage = () => {
@@ -28,8 +31,8 @@ const LandingPage = () => {
     {
       icon: Shield,
       title: "Deep Shariah Screening",
-      description: "AI-powered analysis of stocks & ETFs with AAOIFI compliance and multi-jurisdictional overlay support",
-      details: "Upload financial reports, API feeds, or documents. Our AI parses footnotes, segment-level financials, and disclosures to provide comprehensive Shariah screening with full audit trails."
+      description: "AI agents analyze complex financial structures, segment-level data, and footnote disclosures that traditional rule-based systems miss",
+      details: "Go beyond surface-level ratios. Our AI parses complex financial statements, identifies hidden revenue streams, analyzes business model changes, and tracks compliance across subsidiaries. We provide dynamic, context-aware screening that adapts to evolving business structures."
     },
     {
       icon: FileText,
@@ -58,29 +61,24 @@ const LandingPage = () => {
     {
       name: "Dr. Ahmed Al-Rashid",
       role: "Chief Shariah Officer",
-      company: "Gulf Islamic Bank",
-      content: "Amana AI has revolutionized our compliance processes. The multi-jurisdictional support and audit trails give us complete confidence in our Shariah screening.",
+      company: "Leading Islamic Banking Group, Saudi Arabia",
+      content: "Amana AI transformed our entire compliance workflow. The multi-jurisdictional support and comprehensive audit trails give us unparalleled confidence in our Shariah screening decisions.",
       rating: 5
     },
     {
       name: "Fatima Hassan",
-      role: "Compliance Director",
-      company: "Maybank Islamic",
-      content: "The AI-powered document review has reduced our compliance review time by 80% while improving accuracy. Essential for any Islamic financial institution.",
+      role: "Compliance Director", 
+      company: "Premier Islamic Fund House, Malaysia",
+      content: "We've cut compliance review time by 80% while dramatically improving accuracy. This isn't just a tool—it's become essential infrastructure for our operations.",
       rating: 5
     },
     {
       name: "Mohammad Zubair",
       role: "Fund Manager",
-      company: "Al Rayan Investment",
-      content: "The purification calculations are incredibly precise. We can now provide our investors with detailed, auditable purification reports instantly.",
+      company: "Leading Islamic Investment House, UAE",
+      content: "The precision of purification calculations is remarkable. We now deliver detailed, audit-ready purification reports to investors instantly—something that used to take weeks.",
       rating: 5
     }
-  ]
-
-  const institutions = [
-    "Gulf Islamic Bank", "Maybank Islamic", "Al Rayan Bank", "Dubai Islamic Bank", 
-    "Kuwait Finance House", "Bank Islam Malaysia", "Amanah Mutual", "Saturna Capital"
   ]
 
   return (
@@ -91,7 +89,7 @@ const LandingPage = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <Shield className="w-5 h-5 text-white" />
+                <Brain className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-semibold text-primary">Amana AI</span>
             </div>
@@ -100,7 +98,7 @@ const LandingPage = () => {
               <a href="#features" className="text-gray-600 hover:text-primary transition-colors">Features</a>
               <a href="#jurisdictions" className="text-gray-600 hover:text-primary transition-colors">Coverage</a>
               <a href="#testimonials" className="text-gray-600 hover:text-primary transition-colors">Testimonials</a>
-              <a href="#pricing" className="text-gray-600 hover:text-primary transition-colors">Pricing</a>
+              <Link to="/pricing" className="text-gray-600 hover:text-primary transition-colors">Pricing</Link>
             </div>
 
             <div className="flex items-center space-x-4">
@@ -123,27 +121,21 @@ const LandingPage = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-4xl mx-auto">
-            <Badge className="mb-6 bg-accent/10 text-accent-foreground border-accent/20">
-              <Award className="w-4 h-4 mr-2" />
-              Trusted by 50+ Islamic Financial Institutions
-            </Badge>
-            
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Enterprise-Grade
+              AI-Powered
               <span className="text-primary block">Shariah Compliance</span>
-              <span className="text-accent">AI Engine</span>
+              <span className="text-accent">Made Simple</span>
             </h1>
             
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              The only AI-powered compliance platform purpose-built for regulated Islamic financial institutions. 
-              Screen investments, review marketing materials, and calculate purifications with complete audit trails 
-              and multi-jurisdictional support.
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+              Screen investments, review marketing materials, and calculate purifications 
+              with institutional-grade precision. Built for regulated Islamic finance.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Link to="/auth">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 py-6">
-                  Start Free 30-Day Trial
+                  Start Free Trial
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
@@ -154,41 +146,28 @@ const LandingPage = () => {
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-500">
+            <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-gray-600">
               <div className="flex items-center">
-                <Lock className="w-4 h-4 mr-2" />
+                <Lock className="w-4 h-4 mr-2 text-accent" />
                 Enterprise Security
               </div>
               <div className="flex items-center">
-                <Shield className="w-4 h-4 mr-2" />
+                <Shield className="w-4 h-4 mr-2 text-accent" />
                 AAOIFI Compliant
               </div>
               <div className="flex items-center">
-                <Globe className="w-4 h-4 mr-2" />
+                <Globe className="w-4 h-4 mr-2 text-accent" />
                 Multi-Jurisdictional
               </div>
               <div className="flex items-center">
-                <BookOpen className="w-4 h-4 mr-2" />
+                <BookOpen className="w-4 h-4 mr-2 text-accent" />
                 Full Audit Trails
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Bar */}
-      <section className="py-12 bg-white border-y">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-gray-500 mb-8">Trusted by leading Islamic financial institutions worldwide</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-60">
-            {institutions.map((institution, index) => (
-              <div key={index} className="text-center">
-                <div className="h-12 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <Building2 className="w-6 h-6 text-gray-400" />
-                </div>
-                <p className="text-sm text-gray-500 mt-2">{institution}</p>
+              <div className="flex items-center">
+                <Database className="w-4 h-4 mr-2 text-accent" />
+                S&P Capital IQ & AlphaSense
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
@@ -198,11 +177,11 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Complete Shariah Compliance Suite
+              Everything You Need for Shariah Compliance
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Three powerful modules designed specifically for Islamic financial institutions, 
-              with enterprise-grade security and full regulatory compliance.
+              Three AI-powered modules that transform how Islamic financial institutions 
+              manage compliance, risk, and regulatory requirements.
             </p>
           </div>
 
@@ -267,11 +246,11 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Multi-Jurisdictional Coverage
+              Global Shariah Standards Support
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              AAOIFI standards by default, with overlay support for local Shariah requirements 
-              across major Islamic finance jurisdictions.
+              AAOIFI-compliant by default, with intelligent overlays for local requirements 
+              across every major Islamic finance jurisdiction worldwide.
             </p>
           </div>
 
@@ -302,10 +281,10 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Trusted by Industry Leaders
+              Trusted by Leading Islamic Institutions
             </h2>
             <p className="text-xl text-gray-600">
-              See what compliance officers and Shariah scholars say about Amana AI
+              Join the compliance officers and Shariah scholars who rely on Amana AI daily
             </p>
           </div>
 
@@ -315,7 +294,7 @@ const LandingPage = () => {
                 <CardHeader>
                   <div className="flex items-center space-x-1 mb-3">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      <Star key={i} className="w-4 h-4 fill-accent text-accent" />
                     ))}
                   </div>
                   <CardDescription className="text-base italic">
@@ -344,11 +323,11 @@ const LandingPage = () => {
       <section className="py-20 bg-primary text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Transform Your Compliance Process?
+            Ready to Revolutionize Your Compliance?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Join 50+ Islamic financial institutions already using Amana AI to strengthen 
-            Shariah governance and reduce compliance risk.
+            Join leading Islamic institutions using AI to streamline Shariah compliance, 
+            reduce risk, and scale with confidence.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/auth">
@@ -371,7 +350,7 @@ const LandingPage = () => {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                  <Shield className="w-5 h-5 text-white" />
+                  <Brain className="w-5 h-5 text-white" />
                 </div>
                 <span className="text-xl font-semibold">Amana AI</span>
               </div>

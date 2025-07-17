@@ -6,6 +6,7 @@ import AuthPage from './pages/AuthPage'
 import ShariahScreening from './pages/ShariahScreening'
 import MarketingReview from './pages/MarketingReview'
 import PurificationCalculator from './pages/PurificationCalculator'
+import PricingPage from './pages/PricingPage'
 
 // Initialize Blink SDK
 const blink = createClient({
@@ -19,6 +20,7 @@ function App() {
       <div className="min-h-screen bg-background">
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/screening" element={<ShariahScreening />} />
