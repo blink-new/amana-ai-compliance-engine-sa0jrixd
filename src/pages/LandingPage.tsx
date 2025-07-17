@@ -30,7 +30,7 @@ const LandingPage = () => {
   const features = [
     {
       icon: Shield,
-      title: "Deep Shariah Screening",
+      title: "Deep Shariah Stock Screening",
       description: "AI agents analyze complex financial structures, segment-level data, and footnote disclosures that traditional rule-based systems miss",
       details: "Go beyond surface-level ratios. Our AI parses complex financial statements, identifies hidden revenue streams, analyzes business model changes, and tracks compliance across subsidiaries. We provide dynamic, context-aware screening that adapts to evolving business structures."
     },
