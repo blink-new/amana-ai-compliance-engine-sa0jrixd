@@ -25,7 +25,8 @@ import {
   Calendar,
   Target,
   Shield,
-  AlertCircle
+  AlertCircle,
+  Users
 } from 'lucide-react'
 
 interface StockProfileProps {
@@ -84,34 +85,68 @@ const mockAuditTrail = [
   {
     id: '1',
     action: 'AI Analysis Completed',
-    details: 'Parsed 10-K filing and identified revenue segments',
-    source: 'SEC EDGAR',
+    details: 'Parsed 10-K filing and identified revenue segments using NLP engine',
+    source: 'SEC EDGAR - 10-K 2023',
     confidence: 0.95,
-    timestamp: '2024-01-15T10:30:00Z'
+    timestamp: '2024-01-15T10:30:00Z',
+    user: 'AI System',
+    documentLinks: ['https://sec.gov/edgar/10-k-2023.pdf'],
+    changes: []
   },
   {
     id: '2',
     action: 'Financial Ratios Calculated',
-    details: 'Debt-to-assets ratio: 28% (Pass), Interest income: 1.9% (Pass)',
-    source: '10-K 2023',
+    details: 'Debt-to-assets ratio: 28% (Pass), Cash+Interest: 15% (Pass), Non-compliant income: 1.9% (Pass)',
+    source: '10-K 2023, Balance Sheet & Income Statement',
     confidence: 0.92,
-    timestamp: '2024-01-15T10:25:00Z'
+    timestamp: '2024-01-15T10:25:00Z',
+    user: 'AI System',
+    documentLinks: ['https://sec.gov/edgar/10-k-2023.pdf#page=45'],
+    changes: []
   },
   {
     id: '3',
     action: 'Business Activity Classification',
-    details: 'Classified interest income as non-compliant (1.9% of revenue)',
-    source: 'Footnote 12, 10-K',
+    details: 'Classified interest income as non-compliant (1.9% of revenue). Main revenue from product sales (98.1%)',
+    source: 'Footnote 12, 10-K - Revenue Recognition',
     confidence: 0.88,
-    timestamp: '2024-01-15T10:20:00Z'
+    timestamp: '2024-01-15T10:20:00Z',
+    user: 'AI System',
+    documentLinks: ['https://sec.gov/edgar/10-k-2023.pdf#footnote12'],
+    changes: []
   },
   {
     id: '4',
-    action: 'Compliance Verdict',
-    details: 'Stock deemed compliant under AAOIFI standards',
-    source: 'AAOIFI Rulebook',
+    action: 'Compliance Verdict Generated',
+    details: 'Stock deemed compliant under AAOIFI standards. All ratios within thresholds.',
+    source: 'AAOIFI Shariah Standard No. 21',
     confidence: 0.94,
-    timestamp: '2024-01-15T10:35:00Z'
+    timestamp: '2024-01-15T10:35:00Z',
+    user: 'AI System',
+    documentLinks: ['https://aaoifi.com/standard-21/'],
+    changes: []
+  },
+  {
+    id: '5',
+    action: 'Scholar Review',
+    details: 'Reviewed by Dr. Ahmed Al-Rashid. Confirmed compliance status and purification calculation.',
+    source: 'Manual Review',
+    confidence: 1.0,
+    timestamp: '2024-01-15T14:20:00Z',
+    user: 'Dr. Ahmed Al-Rashid',
+    documentLinks: [],
+    changes: ['Added scholar note: "Monitor quarterly for any business model changes"']
+  },
+  {
+    id: '6',
+    action: 'Purification Calculated',
+    details: 'Purification amount: $0.42 per share based on interest income allocation',
+    source: 'AAOIFI Purification Methodology',
+    confidence: 0.96,
+    timestamp: '2024-01-15T10:40:00Z',
+    user: 'AI System',
+    documentLinks: ['https://aaoifi.com/purification-guide/'],
+    changes: []
   }
 ]
 
@@ -350,17 +385,64 @@ const StockProfileCard: React.FC<StockProfileProps> = ({ stock, onBack }) => {
                 <CardContent>
                   <div className="space-y-4">
                     {mockAuditTrail.map((entry) => (
-                      <div key={entry.id} className="border-l-2 border-primary/20 pl-4">
-                        <div className="flex items-center justify-between mb-1">
+                      <div key={entry.id} className="border-l-2 border-primary/20 pl-4 pb-4">
+                        <div className="flex items-center justify-between mb-2">
                           <h4 className="text-sm font-medium">{entry.action}</h4>
-                          <Badge variant="outline" className="text-xs">
-                            {Math.round(entry.confidence * 100)}% confidence
-                          </Badge>
+                          <div className="flex items-center space-x-2">
+                            <Badge variant="outline" className="text-xs">
+                              {Math.round(entry.confidence * 100)}% confidence
+                            </Badge>
+                            {entry.user !== 'AI System' && (
+                              <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">
+                                <Users className="w-3 h-3 mr-1" />
+                                Scholar
+                              </Badge>
+                            )}
+                          </div>
                         </div>
-                        <p className="text-sm text-gray-600 mb-1">{entry.details}</p>
-                        <div className="flex items-center space-x-2 text-xs text-gray-500">
-                          <span>{entry.source}</span>
-                          <span>•</span>
+                        <p className="text-sm text-gray-600 mb-2">{entry.details}</p>
+                        
+                        {/* Document Links */}
+                        {entry.documentLinks && entry.documentLinks.length > 0 && (
+                          <div className="flex items-center space-x-2 mb-2">
+                            <FileText className="w-3 h-3 text-gray-400" />
+                            <div className="flex flex-wrap gap-1">
+                              {entry.documentLinks.map((link, index) => (
+                                <Button
+                                  key={index}
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-6 px-2 text-xs text-blue-600 hover:text-blue-800"
+                                >
+                                  <ExternalLink className="w-3 h-3 mr-1" />
+                                  Source {index + 1}
+                                </Button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Changes Made */}
+                        {entry.changes && entry.changes.length > 0 && (
+                          <div className="mb-2">
+                            <p className="text-xs font-medium text-gray-700 mb-1">Changes Made:</p>
+                            <ul className="text-xs text-gray-600 space-y-1">
+                              {entry.changes.map((change, index) => (
+                                <li key={index} className="flex items-start space-x-1">
+                                  <span className="text-green-600 mt-0.5">•</span>
+                                  <span>{change}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        <div className="flex items-center justify-between text-xs text-gray-500">
+                          <div className="flex items-center space-x-2">
+                            <span>{entry.source}</span>
+                            <span>•</span>
+                            <span>By: {entry.user}</span>
+                          </div>
                           <span>{formatTime(entry.timestamp)}</span>
                         </div>
                       </div>
