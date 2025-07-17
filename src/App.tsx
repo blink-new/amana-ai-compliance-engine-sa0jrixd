@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage'
 import Dashboard from './pages/Dashboard'
 import AuthPage from './pages/AuthPage'
 import ShariahScreening from './pages/ShariahScreening'
+import MarketingReview from './pages/MarketingReview'
 
 // Initialize Blink SDK
 const blink = createClient({
@@ -20,6 +21,7 @@ function App() {
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/screening" element={<ShariahScreening />} />
+          <Route path="/marketing-review" element={<MarketingReview />} />
         </Routes>
       </div>
     </Router>

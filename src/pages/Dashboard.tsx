@@ -276,6 +276,8 @@ const Dashboard = () => {
                         onClick={() => {
                           if (module.title === "Shariah Screening") {
                             navigate('/screening')
+                          } else if (module.title === "Marketing Review") {
+                            navigate('/marketing-review')
                           }
                         }}
                       >
@@ -356,7 +358,11 @@ const Dashboard = () => {
                   <Shield className="w-4 h-4 mr-2" />
                   Screen New Stock
                 </Button>
-                <Button variant="outline" className="w-full justify-start">
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                  onClick={() => navigate('/marketing-review')}
+                >
                   <FileText className="w-4 h-4 mr-2" />
                   Upload Document
                 </Button>
