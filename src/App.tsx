@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard'
 import AuthPage from './pages/AuthPage'
 import ShariahScreening from './pages/ShariahScreening'
 import MarketingReview from './pages/MarketingReview'
+import PurificationCalculator from './pages/PurificationCalculator'
 
 // Initialize Blink SDK
 const blink = createClient({
@@ -22,6 +23,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/screening" element={<ShariahScreening />} />
           <Route path="/marketing-review" element={<MarketingReview />} />
+          <Route path="/purification" element={<PurificationCalculator />} />
         </Routes>
       </div>
     </Router>

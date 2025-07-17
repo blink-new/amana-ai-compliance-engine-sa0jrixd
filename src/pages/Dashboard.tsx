@@ -278,6 +278,8 @@ const Dashboard = () => {
                             navigate('/screening')
                           } else if (module.title === "Marketing Review") {
                             navigate('/marketing-review')
+                          } else if (module.title === "Purification Calculator") {
+                            navigate('/purification')
                           }
                         }}
                       >
@@ -366,7 +368,11 @@ const Dashboard = () => {
                   <FileText className="w-4 h-4 mr-2" />
                   Upload Document
                 </Button>
-                <Button variant="outline" className="w-full justify-start">
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                  onClick={() => navigate('/purification')}
+                >
                   <Calculator className="w-4 h-4 mr-2" />
                   Calculate Purification
                 </Button>
